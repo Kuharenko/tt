@@ -1,9 +1,16 @@
 AddHandler application/x-httpd-php56 .inc .php .php4 .php3 .phtml # phpvs v56
 
-    Options +FollowSymlinks
-    # Enable mod_rewrite
-    RewriteEngine On
+# Mod_Autoindex
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
 
-    # Redirect all requests to web
-    RewriteCond %{REQUEST_URI} ^(.*)$
-    RewriteRule ^(.*)$ /frontend/web/$1
+# Mod_Rewrite
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks
+
+  RewriteEngine On
+  IndexIgnore */*
+  RewriteRule ^admin/(.*)?$ /backend/web/$1 [L,PT]
+  RewriteRule ^([^/].*)?$ /frontend/web/$1
+</IfModule>

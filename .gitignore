@@ -2,6 +2,8 @@
 /yii
 /yii_test
 /yii_test.bat
+/stats
+/cgi-bin
 
 # phpstorm project files
 .idea
